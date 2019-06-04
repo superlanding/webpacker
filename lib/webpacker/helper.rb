@@ -113,16 +113,16 @@ module Webpacker::Helper
   # See: https://webpack.js.org/plugins/split-chunks-plugin/
   # Example:
   #
-  #   <%= stylesheet_packs_with_chunks_tag 'calendar', 'map' %> # =>
+  #   <%= wp_stylesheet_packs_with_chunks_tag 'calendar', 'map' %> # =>
   #   <link rel="stylesheet" media="screen" href="/packs/3-8c7ce31a.chunk.css" />
   #   <link rel="stylesheet" media="screen" href="/packs/calendar-8c7ce31a.chunk.css" />
   #   <link rel="stylesheet" media="screen" href="/packs/map-8c7ce31a.chunk.css" />
   # DO:
-  # <%= stylesheet_packs_with_chunks_tag 'calendar', 'map' %>
+  # <%= wp_stylesheet_packs_with_chunks_tag 'calendar', 'map' %>
   # DON'T:
-  # <%= stylesheet_packs_with_chunks_tag 'calendar' %>
-  # <%= stylesheet_packs_with_chunks_tag 'map' %>
-  def stylesheet_packs_with_chunks_tag(*names, **options)
+  # <%= wp_stylesheet_packs_with_chunks_tag 'calendar' %>
+  # <%= wp_stylesheet_packs_with_chunks_tag 'map' %>
+  def wp_stylesheet_packs_with_chunks_tag(*names, **options)
     if wp_current_webpacker_instance.config.extract_css?
       stylesheet_link_tag(*sources_from_manifest_entrypoints(names, type: :stylesheet), **options)
     end
