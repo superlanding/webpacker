@@ -30,11 +30,11 @@ module Webpacker::Helper
   # Example:
   #
   #   # When extract_css is false in webpacker.yml and the file is a css:
-  #   <%= asset_pack_url 'calendar.css' %> # => nil
+  #   <%= wp_asset_pack_url 'calendar.css' %> # => nil
   #
   #   # When extract_css is true in webpacker.yml or the file is not a css:
-  #   <%= asset_pack_url 'calendar.css' %> # => "http://example.com/packs/calendar-1016838bab065ae1e122.css"
-  def asset_pack_url(name, **options)
+  #   <%= wp_asset_pack_url 'calendar.css' %> # => "http://example.com/packs/calendar-1016838bab065ae1e122.css"
+  def wp_asset_pack_url(name, **options)
     if wp_current_webpacker_instance.config.extract_css? || !stylesheet?(name)
       asset_url(wp_current_webpacker_instance.manifest.lookup!(name), **options)
     end
