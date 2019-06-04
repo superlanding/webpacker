@@ -44,9 +44,9 @@ module Webpacker::Helper
   #
   # Example:
   #
-  #  <%= image_pack_tag 'application.png', size: '16x10', alt: 'Edit Entry' %>
+  #  <%= wp_image_pack_tag 'application.png', size: '16x10', alt: 'Edit Entry' %>
   #  <img alt='Edit Entry' src='/packs/application-k344a6d59eef8632c9d1.png' width='16' height='10' />
-  def image_pack_tag(name, **options)
+  def wp_image_pack_tag(name, **options)
     image_tag(resolve_path_to_image(name), **options)
   end
 
