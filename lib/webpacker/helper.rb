@@ -69,18 +69,18 @@ module Webpacker::Helper
   # See: https://webpack.js.org/plugins/split-chunks-plugin/
   # Example:
   #
-  #   <%= javascript_packs_with_chunks_tag 'calendar', 'map', 'data-turbolinks-track': 'reload' %> # =>
+  #   <%= wp_javascript_packs_with_chunks_tag 'calendar', 'map', 'data-turbolinks-track': 'reload' %> # =>
   #   <script src="/packs/vendor-16838bab065ae1e314.chunk.js" data-turbolinks-track="reload"></script>
   #   <script src="/packs/calendar~runtime-16838bab065ae1e314.chunk.js" data-turbolinks-track="reload"></script>
   #   <script src="/packs/calendar-1016838bab065ae1e314.chunk.js" data-turbolinks-track="reload"></script>
   #   <script src="/packs/map~runtime-16838bab065ae1e314.chunk.js" data-turbolinks-track="reload"></script>
   #   <script src="/packs/map-16838bab065ae1e314.chunk.js" data-turbolinks-track="reload"></script>
   # DO:
-  # <%= javascript_packs_with_chunks_tag 'calendar', 'map' %>
+  # <%= wp_javascript_packs_with_chunks_tag 'calendar', 'map' %>
   # DON'T:
-  # <%= javascript_packs_with_chunks_tag 'calendar' %>
-  # <%= javascript_packs_with_chunks_tag 'map' %>
-  def javascript_packs_with_chunks_tag(*names, **options)
+  # <%= wp_javascript_packs_with_chunks_tag 'calendar' %>
+  # <%= wp_javascript_packs_with_chunks_tag 'map' %>
+  def wp_javascript_packs_with_chunks_tag(*names, **options)
     javascript_include_tag(*sources_from_manifest_entrypoints(names, type: :javascript), **options)
   end
 
