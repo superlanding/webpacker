@@ -2,7 +2,7 @@ module Webpacker::Helper
   # Returns current Webpacker instance.
   # Could be overridden to use multiple Webpacker
   # configurations within the same app (e.g. with engines)
-  def current_webpacker_instance
+  def wp_current_webpacker_instance
     Webpacker.instance
   end
 
@@ -18,8 +18,8 @@ module Webpacker::Helper
   #   # When extract_css is true in webpacker.yml or the file is not a css:
   #   <%= asset_pack_path 'calendar.css' %> # => "/packs/calendar-1016838bab065ae1e122.css"
   def asset_pack_path(name, **options)
-    if current_webpacker_instance.config.extract_css? || !stylesheet?(name)
-      asset_path(current_webpacker_instance.manifest.lookup!(name), **options)
+    if wp_current_webpacker_instance.config.extract_css? || !stylesheet?(name)
+      asset_path(wp_current_webpacker_instance.manifest.lookup!(name), **options)
     end
   end
 
@@ -35,8 +35,8 @@ module Webpacker::Helper
   #   # When extract_css is true in webpacker.yml or the file is not a css:
   #   <%= asset_pack_url 'calendar.css' %> # => "http://example.com/packs/calendar-1016838bab065ae1e122.css"
   def asset_pack_url(name, **options)
-    if current_webpacker_instance.config.extract_css? || !stylesheet?(name)
-      asset_url(current_webpacker_instance.manifest.lookup!(name), **options)
+    if wp_current_webpacker_instance.config.extract_css? || !stylesheet?(name)
+      asset_url(wp_current_webpacker_instance.manifest.lookup!(name), **options)
     end
   end
 
@@ -101,7 +101,7 @@ module Webpacker::Helper
   #   <%= stylesheet_pack_tag 'calendar', 'data-turbolinks-track': 'reload' %> # =>
   #   <link rel="stylesheet" media="screen" href="/packs/calendar-1016838bab065ae1e122.css" data-turbolinks-track="reload" />
   def stylesheet_pack_tag(*names, **options)
-    if current_webpacker_instance.config.extract_css?
+    if wp_current_webpacker_instance.config.extract_css?
       stylesheet_link_tag(*sources_from_manifest_entries(names, type: :stylesheet), **options)
     end
   end
@@ -123,7 +123,7 @@ module Webpacker::Helper
   # <%= stylesheet_packs_with_chunks_tag 'calendar' %>
   # <%= stylesheet_packs_with_chunks_tag 'map' %>
   def stylesheet_packs_with_chunks_tag(*names, **options)
-    if current_webpacker_instance.config.extract_css?
+    if wp_current_webpacker_instance.config.extract_css?
       stylesheet_link_tag(*sources_from_manifest_entrypoints(names, type: :stylesheet), **options)
     end
   end
@@ -134,17 +134,17 @@ module Webpacker::Helper
     end
 
     def sources_from_manifest_entries(names, type:)
-      names.map { |name| current_webpacker_instance.manifest.lookup!(name, type: type) }.flatten
+      names.map { |name| wp_current_webpacker_instance.manifest.lookup!(name, type: type) }.flatten
     end
 
     def sources_from_manifest_entrypoints(names, type:)
-      names.map { |name| current_webpacker_instance.manifest.lookup_pack_with_chunks!(name, type: type) }.flatten.uniq
+      names.map { |name| wp_current_webpacker_instance.manifest.lookup_pack_with_chunks!(name, type: type) }.flatten.uniq
     end
 
     def resolve_path_to_image(name)
       path = name.starts_with?("media/images/") ? name : "media/images/#{name}"
-      asset_path(current_webpacker_instance.manifest.lookup!(path))
+      asset_path(wp_current_webpacker_instance.manifest.lookup!(path))
     rescue
-      asset_path(current_webpacker_instance.manifest.lookup!(name))
+      asset_path(wp_current_webpacker_instance.manifest.lookup!(name))
     end
 end
