@@ -94,13 +94,13 @@ module Webpacker::Helper
   # Examples:
   #
   #   # When extract_css is false in webpacker.yml:
-  #   <%= stylesheet_pack_tag 'calendar', 'data-turbolinks-track': 'reload' %> # =>
+  #   <%= wp_stylesheet_pack_tag 'calendar', 'data-turbolinks-track': 'reload' %> # =>
   #   nil
   #
   #   # When extract_css is true in webpacker.yml:
-  #   <%= stylesheet_pack_tag 'calendar', 'data-turbolinks-track': 'reload' %> # =>
+  #   <%= wp_stylesheet_pack_tag 'calendar', 'data-turbolinks-track': 'reload' %> # =>
   #   <link rel="stylesheet" media="screen" href="/packs/calendar-1016838bab065ae1e122.css" data-turbolinks-track="reload" />
-  def stylesheet_pack_tag(*names, **options)
+  def wp_stylesheet_pack_tag(*names, **options)
     if wp_current_webpacker_instance.config.extract_css?
       stylesheet_link_tag(*sources_from_manifest_entries(names, type: :stylesheet), **options)
     end
