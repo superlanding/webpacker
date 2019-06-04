@@ -56,9 +56,9 @@ module Webpacker::Helper
   #
   # Example:
   #
-  #   <%= javascript_pack_tag 'calendar', 'data-turbolinks-track': 'reload' %> # =>
+  #   <%= wp_javascript_pack_tag 'calendar', 'data-turbolinks-track': 'reload' %> # =>
   #   <script src="/packs/calendar-1016838bab065ae1e314.js" data-turbolinks-track="reload"></script>
-  def javascript_pack_tag(*names, **options)
+  def wp_javascript_pack_tag(*names, **options)
     javascript_include_tag(*sources_from_manifest_entries(names, type: :javascript), **options)
   end
 
