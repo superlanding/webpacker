@@ -46,7 +46,8 @@ const getPluginList = () => {
       integrity: false,
       entrypoints: true,
       writeToDisk: true,
-      publicPath: config.publicPathWithoutCDN
+      publicPath: config.publicPathWithoutCDN,
+      output: config.manifest_output_path || 'manifest.json'
     })
   )
   return result
