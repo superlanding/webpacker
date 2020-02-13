@@ -44,8 +44,8 @@ class Webpacker::Configuration
   end
 
   def public_manifest_path
-    path = fetch(:public_manifest_path)
-    if path.present?
+    manifest_path = fetch(:public_manifest_path)
+    if manifest_path.present?
       root_path.join(manifest_path)
     else
       public_output_path.join("manifest.json")
@@ -81,30 +81,30 @@ class Webpacker::Configuration
   end
 
   private
-    def fetch(key)
-      data.fetch(key, defaults[key])
-    end
+  def fetch(key)
+    data.fetch(key, defaults[key])
+  end
 
-    def data
-      @data ||= load
-    end
+  def data
+    @data ||= load
+  end
 
-    def load
-      YAML.load(config_path.read)[env].deep_symbolize_keys
+  def load
+    YAML.load(config_path.read)[env].deep_symbolize_keys
 
-    rescue Errno::ENOENT => e
-      raise "Webpacker configuration file not found #{config_path}. " \
-            "Please run rails webpacker:install " \
-            "Error: #{e.message}"
+  rescue Errno::ENOENT => e
+    raise "Webpacker configuration file not found #{config_path}. " \
+      "Please run rails webpacker:install " \
+      "Error: #{e.message}"
 
     rescue Psych::SyntaxError => e
       raise "YAML syntax error occurred while parsing #{config_path}. " \
-            "Please note that YAML must be consistently indented using spaces. Tabs are not allowed. " \
-            "Error: #{e.message}"
-    end
+        "Please note that YAML must be consistently indented using spaces. Tabs are not allowed. " \
+        "Error: #{e.message}"
+        end
 
     def defaults
       @defaults ||= \
         HashWithIndifferentAccess.new(YAML.load_file(File.expand_path("../../install/config/webpacker.yml", __FILE__))[env])
     end
-end
+  end
